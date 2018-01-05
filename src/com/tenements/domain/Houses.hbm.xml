@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.tenements.domain.Houses" table="houses">
+		<id name="hid" column="hid">
+			<generator class="native"></generator>
+		</id>
+		<property name="hname" column="hname"></property>
+		<property name="harea" column="harea"></property>
+		
+		<many-to-one name="user" lazy="false" column="uno" class="com.tenements.domain.User"></many-to-one>
+		<set name="water" cascade="delete" inverse="true">
+			<key column="hno"></key>
+			<one-to-many class="com.tenements.domain.Water"/>
+		</set>
+		<set name="electric" cascade="delete" inverse="true">
+			<key column="hno"></key>
+			<one-to-many class="com.tenements.domain.Electric"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>

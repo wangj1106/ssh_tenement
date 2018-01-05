@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-2.5.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	<!-- 引入外部的属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 注入员工的action/service/dao -->
+	<bean id="userAction" class="com.tenements.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="userService" class="com.tenements.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="userDao" class="com.tenements.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 注入部门的action/service/dao -->
+	<bean id="housesAction" class="com.tenements.action.HousesAction" scope="prototype">
+		<property name="housesService" ref="housesService"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="feeService" ref="feeService"></property>
+	</bean>
+	<bean id="housesService" class="com.tenements.service.impl.HousesServiceImpl">
+		<property name="housesDao" ref="housesDao"></property>
+	</bean>
+	<bean id="housesDao" class="com.tenements.dao.impl.HousesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 注入部门的action/service/dao -->
+	<bean id="complaintAction" class="com.tenements.action.ComplaintAction" scope="prototype">
+		<property name="complaintService" ref="complaintService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="complaintService" class="com.tenements.service.impl.ComplaintServiceImpl">
+		<property name="complaintDao" ref="complaintDao"></property>
+	</bean>
+	<bean id="complaintDao" class="com.tenements.dao.impl.ComplaintDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean> 
+	
+	<!-- 注入部门的action/service/dao -->
+	<bean id="adminAction" class="com.tenements.action.AdminAction" scope="prototype">
+		<property name="adminService" ref="adminService"></property>
+	</bean>
+	<bean id="adminService" class="com.tenements.service.impl.AdminServiceImpl">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+	<bean id="adminDao" class="com.tenements.dao.impl.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean> 
+	
+		<!-- 注入部门的action/service/dao -->
+	<bean id="repairAction" class="com.tenements.action.RepairAction" scope="prototype">
+		<property name="repairService" ref="repairService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="repairService" class="com.tenements.service.impl.RepairServiceImpl">
+		<property name="repairDao" ref="repairDao"></property>
+	</bean>
+	<bean id="repairDao" class="com.tenements.dao.impl.RepairDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean> 
+	
+		<!-- 注入部门的action/service/dao -->
+	<bean id="waterAction" class="com.tenements.action.WaterAction" scope="prototype">
+		<property name="waterService" ref="waterService"></property>
+		<property name="housesService" ref="housesService"></property>
+		<property name="feeService" ref="feeService"></property>
+	</bean>
+	<bean id="waterService" class="com.tenements.service.impl.WaterServiceImpl">
+		<property name="waterDao" ref="waterDao"></property>
+	</bean>
+	<bean id="waterDao" class="com.tenements.dao.impl.WaterDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 注入部门的action/service/dao -->
+	<bean id="electricAction" class="com.tenements.action.ElectricAction" scope="prototype">
+		<property name="electricService" ref="electricService"></property>
+		<property name="housesService" ref="housesService"></property>
+		<property name="feeService" ref="feeService"></property>
+	</bean>
+	<bean id="electricService" class="com.tenements.service.impl.ElectricServiceImpl">
+		<property name="electricDao" ref="electricDao"></property>
+	</bean>
+	<bean id="electricDao" class="com.tenements.dao.impl.ElectricDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 注入部门的action/service/dao -->
+	<bean id="feeAction" class="com.tenements.action.FeeAction" scope="prototype">
+		<property name="feeService" ref="feeService"></property>
+	</bean>
+	<bean id="feeService" class="com.tenements.service.impl.FeeServiceImpl">
+		<property name="feeDao" ref="feeDao"></property>
+	</bean>
+	<bean id="feeDao" class="com.tenements.dao.impl.FeeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<!-- 配置hibernate的相关属性 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 加载hibernate相关属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 加载hibernate中的映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/tenements/domain/Houses.hbm.xml</value>
+				<value>com/tenements/domain/User.hbm.xml</value>
+				<value>com/tenements/domain/Complaint.hbm.xml</value>
+				<value>com/tenements/domain/Admin.hbm.xml</value>
+				<value>com/tenements/domain/Repair.hbm.xml</value>
+				<value>com/tenements/domain/Water.hbm.xml</value>
+				<value>com/tenements/domain/Electric.hbm.xml</value>
+				<value>com/tenements/domain/Fee.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置事务管理 -->
+	<bean id="transaction" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transaction"></tx:annotation-driven>
+</beans>

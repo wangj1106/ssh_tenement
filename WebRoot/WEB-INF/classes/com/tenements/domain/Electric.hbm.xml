@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.tenements.domain.Electric" table="Electric">
+		<id name="eid" column="eid">
+			<generator class="native"></generator>
+		</id>
+		<property name="eyear" column="eyear"></property>
+		<property name="emonth" column="emonth"></property>
+		<property name="equan" column="equan"></property>
+		<many-to-one name="houses" lazy="false" column="hno" class="com.tenements.domain.Houses"></many-to-one>
+	</class>
+</hibernate-mapping>

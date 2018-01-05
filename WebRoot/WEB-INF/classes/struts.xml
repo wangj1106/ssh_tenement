@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="ssh" namespace="/" extends="struts-default">
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="input">/userlogin.jsp</result>
+			<result name="success" type="redirect">/userframe.jsp</result>
+			<result name="findAll">/jsp/user/list.jsp</result>
+			<result name="saveUI">/jsp/user/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">user_findAll.action</result>
+			<result name="updateSuccess" type="redirectAction">user_findAll.action</result>
+			<result name="deleteSuccess" type="redirectAction">user_findAll.action</result>
+			<result name="editSuccess">/jsp/user/edit.jsp</result>
+			<result name="findSelf">/jsp/client/user/list.jsp</result>
+			<result name="editSelfSuccess">/jsp/client/user/edit.jsp</result>
+			<result name="updateSelfSuccess" type="redirectAction">user_findSelf.action</result>
+		</action>
+		
+		
+		<action name="houses_*" class="housesAction" method="{1}">
+			<result name="findAll">/jsp/houses/list.jsp</result>
+			<result name="saveUI">/jsp/houses/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">houses_findAll.action</result>
+			<result name="updateSuccess" type="redirectAction">houses_findAll.action</result>
+			<result name="deleteSuccess" type="redirectAction">houses_findAll.action</result>
+			<result name="editSuccess">/jsp/houses/edit.jsp</result>
+			<result name="findHousesByUid">/jsp/client/houses.jsp</result>
+			<result name="findTenementsFee">/jsp/client/tenements.jsp</result>
+		</action>
+		
+		<action name="complaint_*" class="complaintAction" method="{1}">
+			<result name="findAll">/jsp/complaint/list.jsp</result>
+			<result name="saveUI">/jsp/client/complaint/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">complaint_findComplaintByUid.action</result>
+			<result name="deleteSuccess" type="redirectAction">complaint_findAll.action</result>
+			<result name="deleteSuccessByUser" type="redirectAction">complaint_findComplaintByUid.action</result>
+			<result name="findComplaintByUid">/jsp/client/complaint/list.jsp</result>
+			<result name="editSuccess">/jsp/client/complaint/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">complaint_findComplaintByUid.action</result>
+		</action>
+		
+		<action name="admin_*" class="adminAction" method="{1}">
+			<!-- <result name="input">/login.jsp</result> -->
+			<result name="success" type="redirect">/frame.jsp</result>
+		</action>
+		
+		<action name="repair_*" class="repairAction" method="{1}">
+			<result name="findAll">/jsp/repair/list.jsp</result>
+			<result name="saveUI">/jsp/client/repair/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">repair_findRepairByUid.action</result>
+			<result name="deleteSuccess" type="redirectAction">repair_findAll.action</result>
+			<result name="deleteSuccessByUser" type="redirectAction">repair_findRepairByUid.action</result>
+			<result name="findRepairByUid">/jsp/client/repair/list.jsp</result>
+			<result name="editSuccess">/jsp/client/repair/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">repair_findRepairByUid.action</result>
+		</action>
+		
+		<action name="water_*" class="waterAction" method="{1}">
+			<result name="findAll">/jsp/water/list.jsp</result>
+			<result name="saveUI">/jsp/water/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">water_findAll.action</result>
+			<result name="updateSuccess" type="redirectAction">water_findAll.action</result>
+			<result name="deleteSuccess" type="redirectAction">water_findAll.action</result>
+			<result name="editSuccess">/jsp/water/edit.jsp</result>
+			<result name="findWaterByUid">/jsp/client/water.jsp</result>
+		</action>
+		
+		<action name="electric_*" class="electricAction" method="{1}">
+			<result name="findAll">/jsp/electric/list.jsp</result>
+			<result name="saveUI">/jsp/electric/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">electric_findAll.action</result>
+			<result name="updateSuccess" type="redirectAction">electric_findAll.action</result>
+			<result name="deleteSuccess" type="redirectAction">electric_findAll.action</result>
+			<result name="editSuccess">/jsp/electric/edit.jsp</result>
+			<result name="findElectricByUid">/jsp/client/electric.jsp</result>
+		</action>
+		
+		<action name="fee_*" class="feeAction" method="{1}">
+			<result name="findAll">/jsp/fee/list.jsp</result>
+			<result name="saveSuccess" type="redirectAction">fee_findAll.action</result>
+			<result name="updateSuccess" type="redirectAction">fee_findAll.action</result>
+			<result name="editSuccess">/jsp/fee/edit.jsp</result>
+		</action>
+		
+	</package>
+</struts>    
